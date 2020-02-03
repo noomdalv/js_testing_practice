@@ -32,29 +32,32 @@ const cypher = (string, shift) => {
   let encrypt = string.split('');
   
   for (let i = 0; i < encrypt.length; i++) {
-    
-    if (alphabet.indexOf(encrypt[i] === -1)) {
+
+
+    if (alphabet.indexOf(encrypt[i]) === -1) {
       if (encrypt[i].match(/[A-Z]/)) {
 
         encrypt[i] = encrypt[i].toLowerCase();
 
-        let replace = alphabet[alphabet.indexOf(encrypt[i]) + shift];
+        let index = alphabet.indexOf(encrypt[i]) + shift;
+
+        let replace = index > 25 ? alphabet[index - 26] : alphabet[index];
         encrypt[i] = replace.toUpperCase();
-
-        continue;
-
-      } else {
-
-        continue;
       }
-    } else {
-      let replace = alphabet[alphabet.indexOf(encrypt[i]) + shift];
-      encrypt[i] = replace;
+      continue;
     }
+
+    let index = alphabet.indexOf(encrypt[i]) + shift;
+    
+    let replace = index > 25 ? alphabet[index - 26] : alphabet[index];
+    encrypt[i] = replace;
+    
   };
   
   return encrypt.join('');
 };
 
-console.log(cypher('abc', 1))
+console.log(cypher('Abc Xyz!', 4))
   
+
+
