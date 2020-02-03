@@ -1,6 +1,6 @@
 const functions = require('./functions');
 
-test('String functions', () => {
+describe('String functions', () => {
   it('takes a string and returns that string with the first character capitalized', () => {
     expect(functions.capitalize('hello')).toBe('Hello');
     expect(functions.capitalize('hello')).toEqual('Hello');
@@ -13,7 +13,7 @@ test('String functions', () => {
 });
 
 
-test('Calculator functions', () => {
+describe('Calculator functions', () => {
   it('add 2 numbers properly', () => {
     expect(functions.sum(2, 2)).toBe(4);
     expect(functions.sum(1, 3)).not.toBe(3);
@@ -21,7 +21,7 @@ test('Calculator functions', () => {
 
   it('subtract 2 numbers properly', () => {
     expect(functions.subtract(2, 2)).toBe(0);
-    expect(functions.subtract(5, 2)).toEqual(-3);
+    expect(functions.subtract(5, 2)).toEqual(3);
   });
 
   it('multiplies 2 numbers properly', () => {
@@ -36,21 +36,19 @@ test('Calculator functions', () => {
 });
 
 
-test('Caesar Cypher function', () => {
+describe('Caesar Cypher function', () => {
   it('converts given string and shift input using caesar cypher', () => {
-    expect(functions.cypher('hello world', 5).toEqual('mjqqt btwqi'));
+    expect(functions.cypher.encrypt('Abc Def!', 1)).toEqual('Bcd Efg!');
   });
 
   it('converts given string with uppercase letters properly using cypher', () => {
-    expect(functions.cypher('Microverse Javascript', 13).toEqual('Zvpebirefr Wninfpevcg'));
+    expect(functions.cypher.decrypt('Bcd Efg!', 1)).toEqual('Abc Def!');
   });
 });
 
 
-test('Array analysis function', () => {
+describe('Array analysis function', () => {
   it('takes an array of numbers and returns object with average, min, max, and length properties', () => {
-    expect(functions.arrayAnalysis([1, 2, 3]).toEqual({
-      average: 2, min: 1, max: 3, length: 3,
-    }));
+    expect(functions.arrayAnalysis([1, 2, 3])).toEqual({ average: 2, min: 1, max: 3, length: 3 });
   });
 });
