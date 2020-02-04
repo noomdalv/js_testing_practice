@@ -49,6 +49,8 @@ describe('Caesar Cypher function', () => {
 
 describe('Array analysis function', () => {
   it('takes an array of numbers and returns object with average, min, max, and length properties', () => {
-    expect(functions.arrayAnalysis([1, 2, 3])).toEqual({ average: 2, min: 1, max: 3, length: 3 });
+    expect(functions.arrayAnalysis([1, 2, 3])).toEqual({
+      average: 2, min: 1, max: 3, length: 3,
+    });
   });
 });

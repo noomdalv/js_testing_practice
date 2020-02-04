@@ -16,7 +16,7 @@ const functions = {
   cypher: {
 
     encrypt: (string, shift) => {
-			let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+      const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
       const encrypt = string.split('');
 
       for (let i = 0; i < encrypt.length; i++) {
@@ -35,11 +35,8 @@ const functions = {
       }
       return encrypt.join('');
     },
-    decrypt: (string, shift) => {			
-			return functions.cypher.encrypt(string, (26 - (shift % 26)));
-    },
+    decrypt: (string, shift) => functions.cypher.encrypt(string, (26 - (shift % 26))),
   },
 };
-console.log(functions.cypher.decrypt('Wxy Zab!', 100));
 
 module.exports = functions;
