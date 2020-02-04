@@ -16,8 +16,7 @@ const functions = {
   cypher: {
 
     encrypt: (string, shift) => {
-      const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
+			let alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
       const encrypt = string.split('');
 
       for (let i = 0; i < encrypt.length; i++) {
@@ -36,29 +35,11 @@ const functions = {
       }
       return encrypt.join('');
     },
-    decrypt: (string, shift) => {
-      const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
-      const decrypt = string.split('');
-
-      for (let i = 0; i < decrypt.length; i++) {
-        if (alphabet.indexOf(decrypt[i]) === -1) {
-          if (decrypt[i].match(/[A-Z]/)) {
-            decrypt[i] = decrypt[i].toLowerCase();
-						const replace = alphabet[Math.abs((alphabet.indexOf(decrypt[i]) - shift)% 26)];
-
-            decrypt[i] = replace.toUpperCase();
-						console.log(decrypt[i]);
-          }
-          continue;
-        }
-				const replace = alphabet[Math.abs((alphabet.indexOf(decrypt[i]) - shift)% 26)];
-				console.log(replace);
-        console.log(decrypt[i]);
-      }
-      return decrypt.join('');
+    decrypt: (string, shift) => {			
+			return functions.cypher.encrypt(string, (26 - (shift % 26)));
     },
   },
 };
-functions.cypher.decrypt("Wxy Zab!", 100);
+console.log(functions.cypher.decrypt('Wxy Zab!', 100));
+
 module.exports = functions;
