@@ -38,11 +38,11 @@ describe('Calculator functions', () => {
 
 describe('Caesar Cypher function', () => {
   it('converts given string and shift input using caesar cypher', () => {
-    expect(functions.cypher.encrypt('Abc Def!', 1)).toEqual('Bcd Efg!');
+    expect(functions.cypher.encrypt('Abc Def!', 100)).toEqual('Wxy Zab!');
   });
 
   it('converts given string with uppercase letters properly using cypher', () => {
-    expect(functions.cypher.decrypt('Bcd Efg!', 1)).toEqual('Abc Def!');
+    expect(functions.cypher.decrypt('Wxy Zab!', 100)).toEqual('Abc Def!');
   });
 });
 
