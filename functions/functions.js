@@ -1,10 +1,12 @@
 const functions = {
   capitalize: string => string.charAt(0).toUpperCase() + string.slice(1),
   reverse: string => string.split('').reverse().join(''),
-  sum: (num1, num2) => num1 + num2,
-  subtract: (num1, num2) => num1 - num2,
-  multiply: (num1, num2) => num1 * num2,
-  divide: (num1, num2) => num1 / num2,
+  calculator: {
+    sum: (num1, num2) => num1 + num2,
+    subtract: (num1, num2) => num1 - num2,
+    multiply: (num1, num2) => num1 * num2,
+    divide: (num1, num2) => num1 / num2,
+  },
   arrayAnalysis: array => ({
     average: array.reduce((prev, cur) => prev += cur) / array.length,
     min: Math.min(...array),
