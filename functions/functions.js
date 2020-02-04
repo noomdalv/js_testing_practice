@@ -14,96 +14,51 @@ const functions = {
     length: array.length,
   }),
   cypher: {
-		(key, strPlain) => {
 
-    // Int -> String -> String
-    let caesar = (k, s) => s.split('')
-        .map(c => tr(
-            inRange(['a', 'z'], c) ? 'a' :
-            inRange(['A', 'Z'], c) ? 'A' : 0,
-            k, c
-        ))
-        .join('');
+    encrypt: (string, shift) => {
+      const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    // Int -> String -> String
-    let unCaesar = (k, s) => caesar(26 - (k % 26), s);
+      const encrypt = string.split('');
 
-    // Char -> Int -> Char -> Char
-    let tr = (base, offset, char) =>
-        base ? (
-            String.fromCharCode(
-                ord(base) + (
-                    ord(char) - ord(base) + offset
-                ) % 26
-            )
-        ) : char;
+      for (let i = 0; i < encrypt.length; i++) {
+        if (alphabet.indexOf(encrypt[i]) === -1) {
+          if (encrypt[i].match(/[A-Z]/)) {
+            encrypt[i] = encrypt[i].toLowerCase();
 
-    // [a, a] -> a -> b
-    let inRange = ([min, max], v) => !(v < min || v > max);
+            const replace = alphabet[(alphabet.indexOf(encrypt[i]) + shift) % 26];
+            encrypt[i] = replace.toUpperCase();
+          }
+          continue;
+        }
 
-    // Char -> Int
-    let ord = c => c.charCodeAt(0);
+        const replace = alphabet[(alphabet.indexOf(encrypt[i]) + shift) % 26];
+        encrypt[i] = replace;
+      }
+      return encrypt.join('');
+    },
+    decrypt: (string, shift) => {
+      const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-    // range :: Int -> Int -> [Int]
-    let range = (m, n) =>
-        Array.from({
-            length: Math.floor(n - m) + 1
-        }, (_, i) => m + i);
+      const decrypt = string.split('');
 
-    // TEST
-    let strCipher = caesar(key, strPlain),
-        strDecode = unCaesar(key, strCipher);
+      for (let i = 0; i < decrypt.length; i++) {
+        if (alphabet.indexOf(decrypt[i]) === -1) {
+          if (decrypt[i].match(/[A-Z]/)) {
+            decrypt[i] = decrypt[i].toLowerCase();
+						const replace = alphabet[Math.abs((alphabet.indexOf(decrypt[i]) - shift)% 26)];
 
-    return [strCipher, ' -> ', strDecode];
-
-};
-
-    // encrypt: (string, shift) => {
-    //   const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-		//
-    //   const encrypt = string.split('');
-		//
-    //   for (let i = 0; i < encrypt.length; i++) {
-    //     if (alphabet.indexOf(encrypt[i]) === -1) {
-    //       if (encrypt[i].match(/[A-Z]/)) {
-    //         encrypt[i] = encrypt[i].toLowerCase();
-		//
-    //         const replace = alphabet[(alphabet.indexOf(encrypt[i]) + shift) % 26];
-    //         encrypt[i] = replace.toUpperCase();
-    //       }
-    //       continue;
-    //     }
-		//
-    //     const replace = alphabet[(alphabet.indexOf(encrypt[i]) + shift) % 26];
-    //     encrypt[i] = replace;
-    //   }
-    //   return encrypt.join('');
-    // },
-    // decrypt: (string, shift) => {
-    //   const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-		//
-    //   const decrypt = string.split('');
-		//
-    //   for (let i = 0; i < decrypt.length; i++) {
-    //     if (alphabet.indexOf(decrypt[i]) === -1) {
-    //       if (decrypt[i].match(/[A-Z]/)) {
-    //         decrypt[i] = decrypt[i].toLowerCase();
-		// 				let replace = Math.abs(alphabet.indexOf(decrypt[i] - shift));
-    //         replace = replace % 26;
-		// 				console.log(replace);
-    //         decrypt[i] = alphabet[replace].toUpperCase();
-    //       }
-    //       continue;
-    //     }
-		//
-		// 		let replace = Math.abs(alphabet.indexOf(decrypt[i] - shift));
-		// 		replace = replace % 26;
-		// 		console.log(replace);
-    //     decrypt[i] = alphabet[replace];
-    //   }
-    //   return decrypt.join('');
-    // },
+            decrypt[i] = replace.toUpperCase();
+						console.log(decrypt[i]);
+          }
+          continue;
+        }
+				const replace = alphabet[Math.abs((alphabet.indexOf(decrypt[i]) - shift)% 26)];
+				console.log(replace);
+        console.log(decrypt[i]);
+      }
+      return decrypt.join('');
+    },
   },
 };
-functions.cypher.strDecode(100, "Wxy Zab!");
+functions.cypher.decrypt("Wxy Zab!", 100);
 module.exports = functions;
